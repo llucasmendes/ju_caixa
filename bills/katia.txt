@@ -1,0 +1,6 @@
+        Ju Gourmet 
+bolo da vovo              ... $5.99 
+coca colaa                ... $5 
+desconto:                 ... 10.00
+------------------------------------
+total:                    ... 9.89
