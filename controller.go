@@ -26,7 +26,7 @@ func createBill() bill {
 
 func promptOptions(b bill) {
 	reader := bufio.NewReader(os.Stdin)
-	opt, _ := getInput("\nEscolha uma opcao:\n\na - adicionar item\nd - adicionar desconto\nv - ver conta atual\ns - salvar conta    | ", reader)
+	opt, _ := getInput("\nEscolha uma opcao:\n\na - adicionar item\ne - excluir item\nd - adicionar desconto\nv - ver conta atual\ns - salvar conta    | ", reader)
 	switch opt {
 	case "a":
 		name, _ := getInput("\nNome do produto: ", reader)
@@ -47,6 +47,24 @@ func promptOptions(b bill) {
 		fmt.Print(a)
 	case "v":
 		fmt.Println(b.formatBill())
+		promptOptions(b)
+	case "e":
+		i := 0
+		s := []string{}
+
+		for k := range b.itens {
+			fmt.Println(i, "--", k)
+			s = append(s, k)
+			i++
+		}
+		a, _ := getInput("\nEscolha um item:", reader)
+		p, err := strconv.ParseInt(a, 0, 64)
+		if err != nil {
+			fmt.Println("\nO item deve ser um número!!!")
+			promptOptions(b)
+		}
+		b.removeItem(s[p])
+
 		promptOptions(b)
 	case "d":
 		tip, _ := getInput("Entre com a porcentagem do desconto: ", reader)

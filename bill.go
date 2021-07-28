@@ -6,16 +6,18 @@ import (
 )
 
 type bill struct {
-	name  string
-	itens map[string]float64
-	tip   float64
+	name     string
+	itens    map[string]float64
+	tip      float64
+	quantity int
 }
 
 func newBill(name string) bill {
 	b := bill{
-		name:  name,
-		itens: map[string]float64{},
-		tip:   0,
+		quantity: 1,
+		name:     name,
+		itens:    map[string]float64{},
+		tip:      0,
 	}
 	return b
 }
@@ -40,6 +42,9 @@ func (b *bill) updateTip(tip float64) {
 }
 func (b *bill) addItem(name string, price float64) {
 	b.itens[name] = price
+}
+func (b *bill) removeItem(i string) {
+	delete(b.itens, i)
 }
 
 func (b *bill) save() {
