@@ -1,0 +1,7 @@
+        Ju Gourmet 
+biscoitinho               ... $5.99 
+croasant                  ... $12.99 
+cafe                      ... $5.99 
+desconto:                 ... 10.00
+------------------------------------
+total:                    ... 22.47

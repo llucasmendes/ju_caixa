@@ -1,0 +1,7 @@
+        Ju Gourmet 🧁❤ 
+cafe                      ... $4.99 
+cafe grande               ... $7.99 
+desconto:                 ... 5.00 `⌘`
+valor desconto:           ... 0.65
+------------------------------------
+total:                    ... 12.33

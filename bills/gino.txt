@@ -1,6 +1,12 @@
-        Ju Gourmet 
-copao                     ... $12.9 
-taca                      ... $14.9 
-desconto:                 ... 15.00
+
+
+        Ju Gourmet 🧁❤ 
+torre de brw              ... $10.9 
+macaxeira de f p          ... $11.9 
+coca lata                 ... $5 
+
+desconto:                 ... 10.00⌘
+valor desconto:           ... 2.78
 ------------------------------------
-total:                    ... 23.63
+total:                    ... 27.80
+total com desconto:       ... 25.02

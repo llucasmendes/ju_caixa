@@ -20,7 +20,7 @@ func newBill(name string) bill {
 	return b
 }
 func (b *bill) formatBill() string {
-	fs := "        Ju Gourmet \n"
+	fs := "\n\n        Ju Gourmet 🧁❤ \n"
 	var total float64 = 0
 
 	for k, v := range b.itens {
@@ -28,9 +28,11 @@ func (b *bill) formatBill() string {
 		total += v
 	}
 
-	fs += fmt.Sprintf("%-25v ... %0.2f\n", "desconto:", b.tip)
-	fs += fmt.Sprintf("------------------------------------\n")
-	fs += fmt.Sprintf("%-25v ... %0.2f", "total:", total-(total*(b.tip/100.0)))
+	fs += fmt.Sprintf("\n%-25v ... %0.2f⌘\n", "desconto:", b.tip)
+	fs += fmt.Sprintf("%-25v ... %0.2f", "valor desconto:", (total * (b.tip / 100.0)))
+	fs += fmt.Sprintf("\n------------------------------------\n")
+	fs += fmt.Sprintf("%-25v ... %0.2f\n", "total:", total)
+	fs += fmt.Sprintf("%-25v ... %0.2f", "total com desconto:", total-(total*(b.tip/100.0)))
 	return fs
 }
 func (b *bill) updateTip(tip float64) {
