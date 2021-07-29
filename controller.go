@@ -4,8 +4,11 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/exec"
+	"runtime"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func getInput(prompt string, r *bufio.Reader) (string, error) {
@@ -24,6 +27,31 @@ func createBill() bill {
 	return b
 }
 
+var clear map[string]func() //create a map for storing clear funcs
+
+func init() {
+	clear = make(map[string]func()) //Initialize it
+	clear["linux"] = func() {
+		cmd := exec.Command("clear") //Linux example, its tested
+		cmd.Stdout = os.Stdout
+		cmd.Run()
+	}
+	clear["windows"] = func() {
+		cmd := exec.Command("cmd", "/c", "cls") //Windows example, its tested
+		cmd.Stdout = os.Stdout
+		cmd.Run()
+	}
+}
+
+func CallClear() {
+	value, ok := clear[runtime.GOOS] //runtime.GOOS -> linux, windows, darwin etc.
+	if ok {                          //if we defined a clear func for that platform:
+		value() //we execute it
+	} else { //unsupported platform
+		panic("Your platform is unsupported! I can't clear terminal screen :(")
+	}
+}
+
 func promptOptions(b bill) {
 	reader := bufio.NewReader(os.Stdin)
 	opt, _ := getInput("\nEscolha uma opcao:\n\na - adicionar item\ne - excluir item\nd - adicionar desconto\nv - ver conta atual\ns - salvar conta    | ", reader)
@@ -35,10 +63,14 @@ func promptOptions(b bill) {
 		p, err := strconv.ParseFloat(price, 64)
 		if err != nil {
 			fmt.Println("\nO preço deve ser um número!!!")
+			time.Sleep(2 * time.Second)
+			CallClear()
 			promptOptions(b)
 		}
 		b.addItem(name, p)
 		fmt.Println("\nItem adicionado: ", name, price)
+		time.Sleep(2 * time.Second)
+		CallClear()
 		promptOptions(b)
 	case "s":
 		fmt.Println(b.formatBill())
@@ -61,9 +93,13 @@ func promptOptions(b bill) {
 		p, err := strconv.ParseInt(a, 0, 64)
 		if err != nil {
 			fmt.Println("\nO item deve ser um número!!!")
+			time.Sleep(2 * time.Second)
+			CallClear()
 			promptOptions(b)
 		}
 		b.removeItem(s[p])
+		time.Sleep(2 * time.Second)
+		CallClear()
 
 		promptOptions(b)
 	case "d":
@@ -71,13 +107,19 @@ func promptOptions(b bill) {
 		t, err := strconv.ParseFloat(tip, 64)
 		if err != nil {
 			fmt.Println("\nO desconto deve ser um número!!!")
+			time.Sleep(2 * time.Second)
+			CallClear()
 			promptOptions(b)
 		}
 		b.updateTip(t)
 		fmt.Println("\nDesconto de:", tip)
+		time.Sleep(2 * time.Second)
+		CallClear()
 		promptOptions(b)
 	default:
 		fmt.Println("\nOpcao incorreta...")
+		time.Sleep(2 * time.Second)
+		CallClear()
 		promptOptions(b)
 	}
 }
