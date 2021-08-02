@@ -11,6 +11,8 @@ import (
 	"time"
 )
 
+var counter int = 0
+
 func getInput(prompt string, r *bufio.Reader) (string, error) {
 	fmt.Print(prompt)
 	input, err := r.ReadString('\n')
@@ -58,20 +60,23 @@ func promptOptions(b bill) {
 	switch opt {
 	case "a":
 		name, _ := getInput("\nNome do produto: ", reader)
+		quantity, _ := getInput("\nQuantidade do produto: ", reader)
 		price, _ := getInput("Preço do produto: ", reader)
-
+		q, erro := strconv.ParseFloat(quantity, 64)
 		p, err := strconv.ParseFloat(price, 64)
-		if err != nil {
-			fmt.Println("\nO preço deve ser um número!!!")
+		if err != nil || erro != nil {
+			fmt.Println("\nO preço/quantidade deve ser um número!!!")
 			time.Sleep(2 * time.Second)
 			CallClear()
 			promptOptions(b)
 		}
-		b.addItem(name, p)
-		fmt.Println("\nItem adicionado: ", name, price)
+
+		b.addItem(name, p, q, counter)
+		fmt.Println("\nItem adicionado: ", name, quantity, "x", price)
 		time.Sleep(2 * time.Second)
 		CallClear()
 		promptOptions(b)
+		counter++
 	case "s":
 		fmt.Println(b.formatBill())
 		b.save()
