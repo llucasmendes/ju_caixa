@@ -33,7 +33,7 @@ func (b *bill) formatBill() string {
 		i++
 	}
 
-	fs += fmt.Sprintf("\n%-20v ... %0.2f⌘\n", "Desconto: R$", b.tip)
+	fs += fmt.Sprintf("\n%-20v ... %0.2f⌘\n", "Desconto: ⌘", b.tip)
 	fs += fmt.Sprintf("%-20v ... %0.2f", "Valor Desconto: R$", (total * (b.tip / 100.0)))
 	fs += fmt.Sprintln("\n-----------------------------")
 	fs += fmt.Sprintf("%-20v ...R$ %0.2f\n", "Total: ", total)
@@ -52,6 +52,8 @@ func (b *bill) addItem(name string, price float64, quantity float64, counter int
 func (b *bill) removeItem(i string) {
 	delete(b.itens, i)
 }
+
+// TODO: funcao para mudar a quantidade de produtos
 
 func (b *bill) save() {
 	data := []byte(b.formatBill())
