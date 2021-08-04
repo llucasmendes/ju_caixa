@@ -72,11 +72,12 @@ func promptOptions(b bill) {
 		}
 
 		b.addItem(name, p, q, counter)
+		counter++
 		fmt.Println("\nItem adicionado: ", name, quantity, "x", price)
 		time.Sleep(2 * time.Second)
 		CallClear()
 		promptOptions(b)
-		counter++
+
 	case "s":
 		fmt.Println(b.formatBill())
 		b.save()
