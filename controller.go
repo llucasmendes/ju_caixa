@@ -56,12 +56,12 @@ func CallClear() {
 
 func promptOptions(b bill) {
 	reader := bufio.NewReader(os.Stdin)
-	opt, _ := getInput("\nEscolha uma opcao:\n\na - adicionar item\ne - excluir item\nd - adicionar desconto\nv - ver conta atual\ns - salvar conta    | ", reader)
+	opt, _ := getInput("\nEscolha uma opcao:\n\na - adicionar item\ne - excluir item\nd - adicionar desconto\nv - ver conta atual\nf - forma de pagemento\ns - salvar conta    | ", reader)
 	switch opt {
 	case "a":
 		name, _ := getInput("\nNome do produto: ", reader)
 		quantity, _ := getInput("\nQuantidade do produto: ", reader)
-		price, _ := getInput("Preço do produto: ", reader)
+		price, _ := getInput("\nPreço do produto: ", reader)
 		q, erro := strconv.ParseFloat(quantity, 64)
 		p, err := strconv.ParseFloat(price, 64)
 		if err != nil || erro != nil {
@@ -86,6 +86,10 @@ func promptOptions(b bill) {
 	case "v":
 		fmt.Println(b.formatBill())
 		promptOptions(b)
+	case "f":
+		pagamento, _ := getInput("Entre com a forma de pagamento: ", reader)
+		b.payment = pagamento
+		promptOptions(b)
 	case "e":
 		i := 0
 		s := []string{}
@@ -95,7 +99,7 @@ func promptOptions(b bill) {
 			s = append(s, k)
 			i++
 		}
-		a, _ := getInput("\nEscolha um item:", reader)
+		a, _ := getInput("\nEscolha um item: ", reader)
 		p, err := strconv.ParseInt(a, 0, 64)
 		if err != nil {
 			fmt.Println("\nO item deve ser um número!!!")

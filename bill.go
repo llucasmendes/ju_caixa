@@ -37,7 +37,8 @@ func (b *bill) formatBill() string {
 	fs += fmt.Sprintf("%-20v ... %0.2f", "Valor Desconto: R$", (total * (b.tip / 100.0)))
 	fs += fmt.Sprintln("\n-----------------------------")
 	fs += fmt.Sprintf("%-20v ...R$ %0.2f\n", "Total: ", total)
-	fs += fmt.Sprintf("%-20v ... R$ %0.2f", "Total com desconto: ", total-(total*(b.tip/100.0)))
+	fs += fmt.Sprintf("%-20v ... R$ %0.2f\n", "Total com desconto: ", total-(total*(b.tip/100.0)))
+	fs += fmt.Sprintf("FORMA DE PAGAMENTO: %v", b.payment)
 	return fs
 }
 func (b *bill) updateTip(tip float64) {
