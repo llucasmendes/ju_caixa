@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 )
 
 type bill struct {
@@ -56,8 +57,9 @@ func (b *bill) removeItem(i string) {
 // TODO: funcao para mudar a quantidade de produtos
 
 func (b *bill) save() {
+	currentTime := time.Now()
 	data := []byte(b.formatBill())
-	err := os.WriteFile("bills/"+b.name+".txt", data, 0644)
+	err := os.WriteFile("bills/"+b.name+" "+currentTime.Format("01.02.2006 15:04:05")+".txt", data, 0644)
 	if err != nil {
 		panic(err)
 	}
