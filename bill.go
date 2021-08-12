@@ -29,7 +29,7 @@ func (b *bill) formatBill() string {
 	var total float64 = 0
 	i := 0
 	for k, v := range b.itens {
-		fs += fmt.Sprintf("%vx %-20v ... R$ %0.2f \n", (*b).quantity[i], k+"", v)
+		fs += fmt.Sprintf("%vx %-20v ... R$ %0.2f \n", b.quantity[i], k+"", v)
 		total += v
 		i++
 	}
@@ -59,7 +59,7 @@ func (b *bill) removeItem(i string) {
 func (b *bill) save() {
 	currentTime := time.Now()
 	data := []byte(b.formatBill())
-	err := os.WriteFile("bills/"+b.name+" "+currentTime.Format("01.02.2006 15:04:05")+".txt", data, 0644)
+	err := os.WriteFile("bills/"+b.name+" "+currentTime.Format("01022006150405")+".txt", data, 0644)
 	if err != nil {
 		panic(err)
 	}

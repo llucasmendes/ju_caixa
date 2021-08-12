@@ -71,6 +71,9 @@ func promptOptions(b bill) {
 			CallClear()
 			promptOptions(b)
 		}
+		if q <= 0.0 {
+			q = 1
+		}
 
 		b.addItem(name, p, q, counter)
 		counter++
