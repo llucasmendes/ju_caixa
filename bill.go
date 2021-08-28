@@ -28,8 +28,8 @@ func (b *bill) formatBill() string {
 	fs := "\n\n        Ju Gourmet 🧁❤ \n"
 	var total float64 = 0
 	i := 0
-	for k, v := range b.itens {
-		fs += fmt.Sprintf("%vx %-20v ... R$ %0.2f \n", b.quantity[i], k+"", v)
+	for k, v := range (*b).itens {
+		fs += fmt.Sprintf("%vx %-20v ... R$ %0.2f \n", (*b).quantity[i], k+"", v)
 		total += v
 		i++
 	}
